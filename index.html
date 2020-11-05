@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <!-- Vue JS -->
+    <script src="vue.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <title>Hello, world!</title>
+  </head>
+  <body>
+        <h1 class = "d-flex justify-content-center welcome mt-5" >Welcome to the game</h1>
+        <!-- Button trigger modal -->
+        <div class="d-flex justify-content-around mt-5" id="app">
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
+                Launch the guessing game !
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Number Guessing Game</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>This is THE guessing game</p>
+                            <p>Your job is to guess the number we provided</p>
+                            <p>Our number will be generated randomly form 0-10, so there's no way for you to know</p>
+                            <p>Put your number in the textbox, then we will decide if it's the correct number or not</p>
+                            <div class="jumbotron">
+                                <h3>Input your number here</h3>
+                                <br>
+                                <input type="number" v-model="number" class="form-control">
+                                <br>
+                                <p>Input Number : {{ number }}</p>
+                                <!-- <p>Generated Number : {{ generated_number }}</p> -->
+                                <br>
+                                <button class="btn btn-primary" @click="cek">Check number</button>
+                                <br>
+                                <br>
+                                <button class="btn btn-danger" @click="generate">Generate number</button>
+                            </div>
+                            <p>
+                                <p v-show="correct">
+                                    The results is
+                                    <span v-if="number == generated_number">
+                                        right
+                                    </span>
+                                    <span v-else-if="number != generated_number">
+                                        wrong
+                                    </span>
+                                </p>
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close Game</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+  </body>
+
+  <script>
+      new Vue({
+        el:"#app",
+        data: {
+            number:null,
+            generated_number:Math.ceil(Math.random()*10),
+            correct:null,
+        },
+        methods: {
+            generate() {
+                this.generated_number = Math.ceil(Math.random()*10);
+                this.number=null;
+                this.correct=null;
+            },
+            cek() {
+                this.correct=1;
+            }
+        },
+      });
+  </script>
+</html>
